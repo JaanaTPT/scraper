@@ -36,14 +36,14 @@ async function getOrCache(url){
     }
 }
 
+//MRLOVENSTEIN SCRAPER
 (async ()=> {
-  for(let i = 896; i>886; i--){
+  for(let i = 1168; i>1158; i--){
       try {
-          let data = await getOrCache(`http://gunshowcomic.com/${i}/`);
+          let data = await getOrCache(`https://www.mrlovenstein.com/comic/${i}#comic`);
           const $ = cheerio.load(data);
-          let src = $('.strip').attr('src');
-          let title = $('.strip').attr('title')
-          console.log(src, title);
+          let src = 'https://www.mrlovenstein.com' + $('#comic_main_image').attr('src');
+          console.log(src);
           let parts = src.split('/');
           await download(src, 'images/'+parts[parts.length-1]);
       } catch (err) {
@@ -52,8 +52,19 @@ async function getOrCache(url){
   }
 })();
 
-// axios.get('http://gunshowcomic.com/').then((response) => {
-//   const $ = cheerio.load(response.data);
-//   console.log($('.strip').attr('src'));
-  
-// });
+//GUNSHOWCOMIC SCRAPER
+// (async ()=> {
+//   for(let i = 896; i>886; i--){
+//       try {
+//           let data = await getOrCache(`http://gunshowcomic.com/${i}/`);
+//           const $ = cheerio.load(data);
+//           let src = $('.strip').attr('src');
+//           let title = $('.strip').attr('title')
+//           console.log(src, title);
+//           let parts = src.split('/');
+//           await download(src, 'images/'+parts[parts.length-1]);
+//       } catch (err) {
+//           console.log(err);
+//       }
+//   }
+// })();
